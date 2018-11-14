@@ -1,15 +1,19 @@
 FROM ubuntu:18.04
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # Prepare system requirements
 RUN echo Invalidate Docker Cache to force apt update: 20181022 \
     && apt-get update \
     && apt-get install -y --no-install-recommends python \
-       	   openssh-client \
-	   git \
-	   sudo \
-	   docker.io \
+           openssh-client \
+           git \
+           sudo \
+           docker.io \
            python-pip \
            nginx \
+           supervisor \
+           postfix postfix-pgsql \
            python-setuptools \
            python-dev xz-utils \
            libxslt1-dev libxml2-dev libsasl2-dev libssl-dev \
@@ -25,5 +29,7 @@ RUN echo Invalidate Docker Cache to force apt update: 20181022 \
     && cp wkhtmltox/bin/* /usr/local/bin/ \
     && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ \
     && rm -f wkhtmltox.tar.xz
+
 RUN pip install -U pip zc.buildout
-RUN RUN echo '%sudo ALL=NOPASSWD: ALL' > /etc/sudoers.d/myOverrides
+
+RUN echo '%sudo ALL=NOPASSWD: ALL' > /etc/sudoers.d/myOverrides
