@@ -4,11 +4,15 @@ FROM ubuntu:18.04
 RUN echo Invalidate Docker Cache to force apt update: 20181022 \
     && apt-get update \
     && apt-get install -y --no-install-recommends python \
+       	   openssh-client \
+	   git \
+	   sudo \
+	   docker.io \
            python-pip \
            nginx \
            python-setuptools \
            python-dev xz-utils \
-           libxslt1-dev libxml2-dev libsasl2-dev \
+           libxslt1-dev libxml2-dev libsasl2-dev libssl-dev \
            libjpeg-dev zlib1g-dev libldap2-dev libfreetype6-dev \
            libyaml-dev libgeos-dev libusb-dev \
            postgresql-server-dev-all \
@@ -19,4 +23,7 @@ RUN echo Invalidate Docker Cache to force apt update: 20181022 \
     && tar xvf wkhtmltox.tar.xz \
     && cp wkhtmltox/lib/* /usr/local/lib/ \
     && cp wkhtmltox/bin/* /usr/local/bin/ \
-    && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/
+    && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/ \
+    && rm -f wkhtmltox.tar.xz
+RUN pip install -U pip zc.buildout
+RUN RUN echo '%sudo ALL=NOPASSWD: ALL' > /etc/sudoers.d/myOverrides
