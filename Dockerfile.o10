@@ -34,4 +34,4 @@ RUN pip install -U pip zc.buildout
 
 RUN echo '%sudo ALL=NOPASSWD: ALL' > /etc/sudoers.d/myOverrides
 
-RUN apt -y install dovecot-pop3d dovecot-lmtpd
+RUN apt -y install dovecot-pop3d dovecot-lmtpd gettext
