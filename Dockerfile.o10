@@ -25,7 +25,8 @@ RUN echo Invalidate Docker Cache to force apt update: 20181022 \
            build-essential node-less wget \
   	   libxrender1 libfontconfig1 libxext6 \
            dovecot-pop3d dovecot-lmtpd gettext  \
-           ttf-mscorefonts-installer \
+	   ttf-mscorefonts-installer \
+           fontconfig \
 	   curl nano busybox rsyslog dovecot-imapd \
     && fc-cache -f -v \
     && wget -O wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
