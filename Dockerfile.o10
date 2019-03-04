@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Prepare system requirements
 RUN echo Invalidate Docker Cache to force apt update: 20181022 \
+    && echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections \
     && apt-get update \
     && apt-get install -y --no-install-recommends python \
            openssh-client \
@@ -24,8 +25,10 @@ RUN echo Invalidate Docker Cache to force apt update: 20181022 \
            build-essential node-less wget \
   	   libxrender1 libfontconfig1 libxext6 \
            dovecot-pop3d dovecot-lmtpd gettext  \
+           ttf-mscorefonts-installer \
 	   curl nano busybox rsyslog dovecot-imapd \
-    &&  wget -O wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+    && fc-cache -f -v \
+    && wget -O wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
     && echo '3f923f425d345940089e44c1466f6408b9619562 wkhtmltox.tar.xz' | sha1sum -c - \
     && tar xvf wkhtmltox.tar.xz \
     && cp wkhtmltox/lib/* /usr/local/lib/ \
