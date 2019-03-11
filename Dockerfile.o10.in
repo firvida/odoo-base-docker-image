@@ -4,20 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Prepare system requirements
 RUN apt-get install -y --no-install-recommends \
-           python \
-           openssh-client \
-           git \
-           sudo \
-           docker.io \
-           python-pip \
-           locales \
-           supervisor \
-           postfix postfix-pgsql \
-           python-setuptools \
-           python-dev \
-           dovecot-pop3d dovecot-lmtpd gettext  \
-           rsyslog dovecot-imapd
-
-RUN pip install -U pip zc.buildout
-
-RUN echo '%sudo ALL=NOPASSWD: ALL' > /etc/sudoers.d/myOverrides
+            python \
+            python-pip \
+            python-setuptools \
+            python-dev \

@@ -13,7 +13,6 @@ RUN echo Invalidate Docker Cache to force apt update: 20190310 \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
            xz-utils \
-           nginx \
            libxslt1-dev libxml2-dev libsasl2-dev \
            libjpeg-dev zlib1g-dev libldap2-dev libfreetype6-dev \
            libyaml-dev libgeos-dev libusb-dev \
