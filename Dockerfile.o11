@@ -9,8 +9,12 @@ LABEL maintainer="Merchise Autrement <info@merchise.org>"
 # Generate locale C.UTF-8 for postgres and general locale data
 ENV LANG C.UTF-8
 
+# Don't ask, don't tell
+ENV DEBIAN_FRONTEND noninteractive
+
 # Prepare system requirements
 RUN echo Invalidate Docker Cache to force apt update: 20180422 \
+    && echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections \
     && apt-get update \
     && apt-get install -y --no-install-recommends python3 \
            python3-pip \
