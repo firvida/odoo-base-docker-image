@@ -1,0 +1,28 @@
+---
+stages:
+  - build
+  - publish
+
+.build_image: &build_image
+  script:
+    - docker build -f Dockerfile.$ODOO_TAG "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA"
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker push "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA"
+
+
+build Odoo 10 image:
+  <<: *build_image
+  variables:
+    ODOO_TAG: "o10"
+
+
+build Odoo 11 image:
+  <<: *build_image
+  variables:
+    ODOO_TAG: "o11"
+
+
+build Odoo 12 image:
+  <<: *build_image
+  variables:
+    ODOO_TAG: "o12"
