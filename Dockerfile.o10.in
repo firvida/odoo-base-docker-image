@@ -17,7 +17,7 @@ RUN echo Invalidate Docker Cache to force apt update: 20181022 \
            python-setuptools \
            python-dev \
            dovecot-pop3d dovecot-lmtpd gettext  \
-           rsyslog dovecot-imapd \
+           rsyslog dovecot-imapd
 
 RUN pip install -U pip zc.buildout
 
