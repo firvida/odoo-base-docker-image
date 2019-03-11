@@ -24,6 +24,7 @@ RUN echo Invalidate Docker Cache to force apt update: 20190310 \
            ttf-mscorefonts-installer \
            fontconfig \
            curl nano busybox \
+           locales \
     && fc-cache -f -v \
     &&  wget -O wkhtmltox.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
     && echo '3f923f425d345940089e44c1466f6408b9619562 wkhtmltox.tar.xz' | sha1sum -c - \
@@ -33,7 +34,6 @@ RUN echo Invalidate Docker Cache to force apt update: 20190310 \
     && cp -r wkhtmltox/share/man/man1 /usr/local/share/man/
 
 
-RUN apt-get install -y --no-install-recommends locales
 RUN echo en_US UTF-8 >  /etc/locale.gen
 RUN locale-gen
 
