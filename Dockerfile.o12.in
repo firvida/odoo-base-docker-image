@@ -1,0 +1,12 @@
+# This builds just the bare bones of the 'xhg2' image.  It includes only the
+# basics.  You can however, use to build different deployments.  Just
+# add/remove the desired code from the Pipfile[.lock] and add/remove the
+# subtrees if so desired.
+FROM $CI_REGISTRY_IMAGE:common-$CI_COMMIT_SHA
+
+# Prepare system requirements
+RUN echo Invalidate Docker Cache to force apt update: 20190310 \
+    && apt-get install -y --no-install-recommends python3 \
+           python3-pip \
+           python3-setuptools \
+           python3-dev

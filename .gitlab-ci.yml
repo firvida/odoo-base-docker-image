@@ -1,11 +1,25 @@
 ---
 stages:
+  - pre-build
   - build
   - publish
+
+
+
+build common base:
+  stage: pre-build
+  variables:
+    ODOO_TAG: common
+  script:
+    - docker build -f Dockerfile.$ODOO_TAG -t "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA" .
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker push "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA"
+
 
 .build_image: &build_image
   stage: build
   script:
+    - envsubst < Dockerfile.$ODOO_TAG.in > Dockerfile.$ODOO_TAG
     - docker build -f Dockerfile.$ODOO_TAG -t "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA" .
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
     - docker push "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA"

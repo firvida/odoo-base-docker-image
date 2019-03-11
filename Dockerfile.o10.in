@@ -1,0 +1,24 @@
+FROM $CI_REGISTRY_IMAGE:common-$CI_COMMIT_SHA
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# Prepare system requirements
+RUN echo Invalidate Docker Cache to force apt update: 20181022 \
+    && apt-get install -y --no-install-recommends \
+           python \
+           openssh-client \
+           git \
+           sudo \
+           docker.io \
+           python-pip \
+           locales \
+           supervisor \
+           postfix postfix-pgsql \
+           python-setuptools \
+           python-dev \
+           dovecot-pop3d dovecot-lmtpd gettext  \
+           rsyslog dovecot-imapd \
+
+RUN pip install -U pip zc.buildout
+
+RUN echo '%sudo ALL=NOPASSWD: ALL' > /etc/sudoers.d/myOverrides
