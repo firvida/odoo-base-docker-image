@@ -37,3 +37,21 @@ build Odoo 12 image:
   <<: *build_image
   variables:
     ODOO_TAG: "o12"
+
+
+publish Odoo 10 image:
+  <<: *tag_image
+  variables:
+    ODOO_TAG: "o10"
+
+
+publish Odoo 11 image:
+  <<: *tag_image
+  variables:
+    ODOO_TAG: "o11"
+
+
+publish Odoo 12 image:
+  <<: *tag_image
+  variables:
+    ODOO_TAG: "o12"
