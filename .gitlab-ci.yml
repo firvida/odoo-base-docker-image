@@ -36,6 +36,8 @@ build common base:
     - docker pull "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA"
     - docker tag "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA" "$CI_REGISTRY_IMAGE:$ODOO_TAG"
     - docker push "$CI_REGISTRY_IMAGE:$ODOO_TAG"
+  only:
+    - master
 
 
 build Odoo 10 image:
