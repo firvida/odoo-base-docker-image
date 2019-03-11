@@ -19,6 +19,9 @@ build common base:
 .build_image: &build_image
   stage: build
   script:
+    - apk add --update libintl
+    - apk add --virtual build_deps gettext
+    - cp /usr/bin/envsubst /usr/local/bin/envsubst
     - envsubst < Dockerfile.$ODOO_TAG.in > Dockerfile.$ODOO_TAG
     - docker build -f Dockerfile.$ODOO_TAG -t "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA" .
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
