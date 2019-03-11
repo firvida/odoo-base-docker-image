@@ -30,7 +30,6 @@ build common base:
 
 .tag_image: &tag_image
   stage: publish
-  when: manual
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
     - docker pull "$CI_REGISTRY_IMAGE:$ODOO_TAG-$CI_COMMIT_SHA"
