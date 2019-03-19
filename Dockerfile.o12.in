@@ -7,9 +7,7 @@ FROM $CI_REGISTRY_IMAGE:common-$CI_COMMIT_SHA
 # Prepare system requirements
 RUN apt-get install -y --no-install-recommends \
            python3 \
-           python3-pip \
-           python3-setuptools \
            python3-dev
 
 # The pip provided by python-pip is usually too old.
-RUN pip3 install -U pip
+RUN wget -O - https://bootstrap.pypa.io/get-pip.py | python3

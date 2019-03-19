@@ -5,9 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Prepare system requirements
 RUN apt-get install -y --no-install-recommends \
             python \
-            python-pip \
-            python-setuptools \
             python-dev
 
 # The pip provided by python-pip is usually too old.
-RUN pip install -U pip
+RUN wget -O - https://bootstrap.pypa.io/get-pip.py | python
